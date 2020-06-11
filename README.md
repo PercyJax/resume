@@ -65,7 +65,7 @@ _Nov 2018 – Feb 2019_
 _Mar 2020 - Present_
 - Investigated compliance parameters and researched costs and options
 
-***Custom Grafana Datasource Plugin for Solr*** - _CodeMettle_\
+***Custom Grafana Data Source Plugin for Solr*** - _CodeMettle_\
 _May 2017 - Dec 2017_
 - Created Grafana Data Source plugin with JavaScript to interface with core software NoSQL database (Apache Solr) to visualize customer historical data
 
