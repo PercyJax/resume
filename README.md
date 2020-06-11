@@ -59,7 +59,7 @@ _Nov 2018 – Feb 2019_
 - Led a complete redesign and modernization of the company network following a HQ migration
 - Fiber Optic internal network backbone
 - Supports an office of 160+ users
-- Internal OSPF routing to multiple networks (AWS, Azure, GCC, Pritunl/OpenVPN concentrator)
+- Internal OSPF routing to multiple networks (AWS, Azure, GCP, Pritunl/OpenVPN concentrator)
 
 ***CMMC Compliance Planning*** - _CodeMettle_\
 _Mar 2020 - Present_
