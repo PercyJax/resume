@@ -19,25 +19,25 @@ GitHub: [@PercyJax](https://github.com/PercyJax)
 _Dec 2019 - Present_
 - Developed automation software for infrastructure administration tasks.
 - Provided Computer Networking consultation and training for Project Engineers.
--	Architected advanced networks with modern routing and switching protocols.
--	Led a complete redesign and modernization of the company network with a fiber optic internal network backbone and internal OSPF routing to multiple networks (AWS, Azure, GCP, Pritunl/OpenVPN concentrator) that supports an office of 160+ users following a HQ migration.
--	Built the Tactical Network Operations Exercise, a simulation of Military Tactical Networks for Employee Training and testing of CodeMettle Software.
--	Created an ephemeral sandbox network with virtualized Cisco routers and switches restored nightly using GNS3 and custom scripting that implements BGP, OSPF, VLANs, SDNs, VPNs, etc. over simulated satellite links to test software destined for military DIL (Disconnected, Interrupted, and Low-Bandwidth) networks.
+- Architected advanced networks with modern routing and switching protocols.
+- Led a complete redesign and modernization of the company network with a fiber optic internal network backbone and internal OSPF routing to multiple networks (AWS, Azure, GCP, Pritunl/OpenVPN concentrator) that supports an office of 160+ users following a HQ migration.
+- Built the Tactical Network Operations Exercise, a simulation of Military Tactical Networks for Employee Training and testing of CodeMettle Software.
+- Created an ephemeral sandbox network with virtualized Cisco routers and switches restored nightly using GNS3 and custom scripting that implements BGP, OSPF, VLANs, SDNs, VPNs, etc. over simulated satellite links to test software destined for military DIL (Disconnected, Interrupted, and Low-Bandwidth) networks.
 - Investigated CMMC compliance parameters and researched costs and options.
 
 ***Software Engineer***\
 _Aug 2018 - Dec 2019_
--	Assisted in designing lab environments to emulate customer infrastructure.
--	Maintained internal IT and Networking Infrastructure.
--	Designed lab environments to emulate customer infrastructure for product testing.
--	Implemented Microsoft Azure Active Directory for the company.
+- Assisted in designing lab environments to emulate customer infrastructure.
+- Maintained internal IT and Networking Infrastructure.
+- Designed lab environments to emulate customer infrastructure for product testing.
+- Implemented Microsoft Azure Active Directory for the company.
 
 ***Associate Software Engineer***\
 _May 2015 - Dec 2016_
--	Developed Python extensions (Translators) for core software.
--	Assisted in designing lab environments to emulate customer infrastructure.
--	Designed Network Topologies based on customer signal paths.
--	Created Grafana Data Source plugin with JavaScript to interface with core software NoSQL database (Apache Solr) to visualize customer historical data.
+- Developed Python extensions (Translators) for core software.
+- Assisted in designing lab environments to emulate customer infrastructure.
+- Designed Network Topologies based on customer signal paths.
+- Created Grafana Data Source plugin with JavaScript to interface with core software NoSQL database (Apache Solr) to visualize customer historical data.
 
 ### Georgia Institute of Technology
 ***Cyber Security Analyst***\
