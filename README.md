@@ -1,6 +1,6 @@
 ![Percy Yeung](https://percyyeung.com/static/images/redlogo200.png)
 # Percy Yeung
-_Network Infrastructure and Software Engineer_\
+_Infrastructure and Software Engineer_\
 US Citizen
 
 ---
@@ -15,8 +15,20 @@ GitHub: [@PercyJax](https://github.com/PercyJax)
 
 ## Experience
 ### CodeMettle, LLC
+***IT Manager***\
+_Dec 2020 - Present_
+- Managed and trained team members on infrastructure systems.
+- Planned for and executed infrastructure improvement initiatives.
+- Tracked departmental budgets and purchases.
+- Liased with HR to build employee onboarding and offboarding automation pipelines.
+- Represented IT interests as a member of the CISO committee.
+- Acted as a subject matter expert for the company in ProxMox virtualization, Linux systems, IT infrastructures, and networking.
+- Engineered solutions for techical problems and challenges from other teams.
+- Built a modern, secure, and cloud-based work environment for upcoming CMMC requirements.
+- Worked on up-and-coming products as a member of various cross-fuctional teams.
+
 ***Senior Engineer***\
-_Dec 2019 - Present_
+_Dec 2019 - Dec 2020_
 - Developed automation software for infrastructure administration tasks.
 - Provided Computer Networking consultation and training for Project Engineers.
 - Architected advanced networks with modern routing and switching protocols.
@@ -51,8 +63,13 @@ _May 2016 - Dec 2017_
 ---
 
 ## Projects
+***Remote Work Office Conversion*** - _CodeMettle_\
+_Mar 2020 - Jun 2020_
+- Overhauled VPN infrastructure for mass remote work.
+- Created remote management solutions for infrastructure and endpoints.
+
 ***Tactical Network Operations Simulation Exercise*** - _CodeMettle_\
-_Apr 2019 – Present_
+_Apr 2019 – Jan 2020_
 - Built simulated Military Tactical Networks for Employee Training and testing of CodeMettle Software
 
 ***CodeMettle Network Playground*** - _CodeMettle_\
