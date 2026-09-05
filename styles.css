@@ -226,6 +226,30 @@ li.sub:before {
   font-size: 9.5pt;
 }
 
+/* ---- Cover letter ---- */
+.letter {
+  max-width: 7in;
+  margin-top: 22pt;
+  line-height: 1.5;
+}
+
+.letter .letter-date {
+  font-size: 9.5pt;
+  color: var(--muted);
+  margin-bottom: 14pt;
+}
+
+.letter p {
+  color: var(--ink);
+  margin-top: 10pt;
+  text-align: justify;
+}
+
+.letter p.sig {
+  margin-top: 22pt;
+  font-weight: 600;
+}
+
 /* ---- Print ---- */
 @media print {
   html,

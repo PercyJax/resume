@@ -1,0 +1,60 @@
+name: Build resume PDF
+
+on:
+  push:
+    paths:
+      - resume.md
+      - build.mjs
+      - styles.css
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Install fonts for layout parity
+        run: |
+          wget -qO /tmp/fira.zip "https://fonts.google.com/download?family=Fira%20Sans"
+          wget -qO /tmp/noto.zip "https://fonts.google.com/download?family=Noto%20Color%20Emoji"
+          sudo mkdir -p /usr/share/fonts/truetype/firasans /usr/share/fonts/truetype/noto
+          sudo unzip -o -q /tmp/fira.zip -d /usr/share/fonts/truetype/firasans || true
+          sudo unzip -o -q /tmp/noto.zip -d /usr/share/fonts/truetype/noto || true
+          sudo fc-cache -f >/dev/null
+
+      - name: Build PDF
+        env:
+          CHROME_BIN: google-chrome-stable
+        run: node build.mjs resume.md
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: build/resume.pdf
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Prune previous resume-pdf artifacts
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          gh api "/repos/${{ github.repository }}/actions/artifacts?per_page=100" --paginate \
+            --jq '.artifacts[] | select(.name == "resume-pdf" and .workflow_run.id != (env.RUN_ID | tonumber)) | .id' \
+            | xargs -r -I{} gh api --method DELETE "/repos/${{ github.repository }}/actions/artifacts/{}"

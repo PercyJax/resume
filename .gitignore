@@ -4,6 +4,12 @@
 # Job-specific resume variants — private, never commit
 /resumes/
 
+# Job-specific cover letters — private, never commit
+/covers/
+
+# Application question drafts — private, never commit, not built
+/applications/
+
 # Node (if dependencies are ever added)
 /node_modules/
 

@@ -5,21 +5,25 @@ small Node script (`build.mjs`) plus Chromium headless.
 
 ## How it works
 
-1. `build.mjs` discovers every `*.md` file under the repo root, skipping
-   `.git/`, `node_modules/`, `build/`, and the documentation files
-   (`README.md`, `BUILDING.md`).
-2. Each resume file is parsed into a structured model (contact block, job
+1. `build.mjs` builds only the master `resume.md` and the `*.md` files inside
+   the whitelisted directories `resumes/` and `covers/`. Anything else
+   (`applications/`, notes, scratch) is never picked up.
+2. Files under `covers/` are rendered as **cover letters**; everything else is
+   rendered as a **resume**. The directory decides, no frontmatter needed.
+3. Each resume file is parsed into a structured model (contact block, job
    entries, skills, education) and rendered into a styled HTML page.
-3. Chromium headless converts the HTML to a PDF.
-4. Output lands in `build/<source-name>.html` and `build/<source-name>.pdf`.
-5. `resume.md` (the master resume) is copied to `README.md` so the repo home
+4. Chromium headless converts the HTML to a PDF.
+5. Output lands in `build/<source-name>.html` and `build/<source-name>.pdf`.
+6. `resume.md` (the master resume) is copied to `README.md` so the repo home
    page shows the resume instead of build instructions.
 
 ## Requirements
 
 - Node.js 18+ (or any version with global `fetch`/`fs/promises`; this script
   uses synchronous `fs` APIs only)
-- Chromium on your `PATH` (used: `chromium --headless --print-to-pdf`)
+- Chromium on your `PATH` (used: `chromium --headless --print-to-pdf`). The
+  binary can be overridden with `CHROME_BIN` (e.g.
+  `CHROME_BIN=google-chrome-stable node build.mjs`), which CI relies on.
 
 ## Rebuild everything
 
@@ -42,6 +46,8 @@ node build.mjs resumes/resume_tailscale_strategic.md
 | `styles.css` | Shared page styling (fonts, colors, spacing, print rules) |
 | `resume.md` | Master resume; source of truth for `README.md` |
 | `resumes/` | Job-specific resume variants (not committed, gitignored) |
+| `covers/` | Job-specific cover letters (not committed, gitignored) |
+| `applications/` | Application question drafts per employer (not committed, gitignored, not built) |
 | `build/` | Generated HTML/PDF output (gitignored) |
 | `README.md` | Auto-generated copy of `resume.md`; what GitHub shows first |
 
@@ -101,6 +107,38 @@ Conventions:
   bullet. Grouped into each school until the next bold line.
 - **Skills:** bullets of `**Label:** value`, rendered as labeled rows.
 
+## Cover letters
+
+Files in `covers/` are rendered as letters (not resumes). Their format is the
+same header plus paragraphs:
+
+```markdown
+# Your Name
+
+Location
+
+you@example.com
+
+linkedin.com/in/you
+
+## September 5, 2026
+
+Dear Hiring Team,
+
+Paragraph one.
+
+Paragraph two.
+
+Best regards,
+
+Your Name
+```
+
+- The `##` line right after the contact block becomes the date line.
+- Everything else is one `<p>` per blank-line-separated paragraph.
+- Sign-offs starting with "Sincerely"/"Best"/"Regards"/"Yours" get extra
+  spacing, and the signature paragraph gets a bold class.
+
 ## Per-file configuration
 
 Optional YAML frontmatter at the top of any resume file controls its build:
@@ -134,8 +172,22 @@ Frontmatter is stripped before parsing, so it never leaks into the output.
 - Contact items are plain text (JSON-safe); icons are `aria-hidden`.
 - PDFs are text-selectable (generated from real text, not images).
 
+## GitHub Actions
+
+`.github/workflows/build-resume.yml` auto-builds on every push that touches
+`resume.md`, `build.mjs`, or `styles.css` (plus manual `workflow_dispatch`):
+
+1. Checkout, Node 20, Google Chrome (`CHROME_BIN`), and Fira Sans/Noto Color
+   Emoji fonts (for layout parity) are set up on `ubuntu-latest`.
+2. `node build.mjs resume.md` builds only the master resume.
+3. `build/resume.pdf` is uploaded as a `resume-pdf` artifact, labeled by run.
+
+Artifacts are versioned per workflow run. A prune step deletes every prior
+`resume-pdf` artifact after upload, so effectively only the latest is kept.
+`retention-days: 30` bounds storage as a fallback.
+
 ## Privacy
 
-- `/build/` and `/resumes/` are gitignored.
+- `/build/`, `/resumes/`, `/covers/`, and `/applications/` are gitignored.
 - `build.mjs`, `styles.css`, and `.gitignore` contain no personal or
   job-application details and are safe to publish.

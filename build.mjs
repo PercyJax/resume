@@ -7,26 +7,33 @@ import { fileURLToPath } from "url";
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const STYLES = readFileSync(join(ROOT, "styles.css"), "utf8");
 
-const SKIP_DIRS = new Set([".git", "node_modules", "build"]);
-const SKIP_MD = new Set(["README.md", "BUILDING.md"]);
+const BUILD_TREES = ["resumes", "covers"];
 
 function isMd(file) {
   return extname(file) === ".md" && readFileSync(file, "utf8").trim();
 }
 
-function discoverMd(dir) {
+/**
+ * Discover buildable markdown sources. Only the master resume.md and the
+ * *.md files inside the whitelisted directories are buildable; any other
+ * directory (applications/, notes, scratch) is never picked up.
+ */
+function discoverMd() {
   const out = [];
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    if (SKIP_DIRS.has(entry.name)) continue;
-    const full = join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...discoverMd(full));
-    else if (entry.isFile() && extname(entry.name) === ".md" && !SKIP_MD.has(entry.name)) out.push(full);
+  const master = join(ROOT, "resume.md");
+  if (existsSync(master)) out.push(master);
+  for (const tree of BUILD_TREES) {
+    const base = join(ROOT, tree);
+    if (!existsSync(base)) continue;
+    for (const entry of readdirSync(base, { withFileTypes: true })) {
+      if (entry.isFile() && extname(entry.name) === ".md") out.push(join(base, entry.name));
+    }
   }
   return out;
 }
 
 const args = process.argv.slice(2).map((p) => join(ROOT, p));
-const sources = (args.length ? args : discoverMd(ROOT)).filter(isMd);
+const sources = (args.length ? args : discoverMd()).filter(isMd);
 
 const esc = (s) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -53,9 +60,10 @@ function parse(md) {
   let contact = [];
   let i = 0;
 
-  if (lines[0].startsWith("# ")) {
-    name = lines[0].slice(2).trim();
-    i = 1;
+  while (i < lines.length && !lines[i].trim()) i++;
+  if (i < lines.length && lines[i].startsWith("# ")) {
+    name = lines[i].slice(2).trim();
+    i++;
   }
   while (i < lines.length && !lines[i].trim()) i++;
   for (; i < lines.length; i++) {
@@ -192,6 +200,63 @@ function renderContact(contactLines) {
     .join("\n");
 }
 
+function parseCoverLetter(md) {
+  const lines = md.split("\n");
+  let name = "";
+  let contact = [];
+  let i = 0;
+
+  while (i < lines.length && !lines[i].trim()) i++;
+  if (i < lines.length && lines[i].startsWith("# ")) {
+    name = lines[i].slice(2).trim();
+    i++;
+  }
+  while (i < lines.length && !lines[i].trim()) i++;
+  for (; i < lines.length; i++) {
+    const t = lines[i].trim();
+    if (!t) continue;
+    if (t.startsWith("## ")) break;
+    contact.push(t);
+  }
+
+  const paras = [];
+  let current = null;
+  for (; i < lines.length; i++) {
+    const t = lines[i].trim();
+    if (!t) continue;
+    if (t.startsWith("## ")) {
+      current = { title: t.slice(3).trim(), paras: [] };
+      paras.push(current);
+    } else {
+      if (!current) {
+        current = { title: "", paras: [] };
+        paras.push(current);
+      }
+      current.paras.push(inline(t));
+    }
+  }
+
+  return { name, contact, paras };
+}
+
+function renderCoverLetter({ name, contact, paras }) {
+  const parts = [];
+  parts.push(`<header>
+    <div class="name">${esc(name)}</div>
+    <div class="contact">${renderContact(contact)}</div>
+  </header>
+  <div class="letter">`);
+  for (const sec of paras) {
+    if (sec.title) parts.push(`    <div class="letter-date">${esc(sec.title)}</div>`);
+    for (const p of sec.paras) {
+      const cls = /^(sincerely|best|regards|yours)/i.test(p) ? ' class="sig"' : "";
+      parts.push(`    <p${cls}>${p}</p>`);
+    }
+  }
+  parts.push(`  </div>`);
+  return parts.join("\n");
+}
+
 function render({ name, contact, sections }) {
   const parts = [];
   parts.push(`<header>
@@ -290,7 +355,7 @@ function overrideCss(overrides) {
   return `:root {\n${vars.join("\n")}\n}${runtime}`;
 }
 
-function buildHtml(data, title, overrides) {
+function buildHtml(data, title, overrides, renderFn = render) {
   const css = overrideCss(overrides);
   return `<!DOCTYPE html>
 <html lang="en">
@@ -302,12 +367,13 @@ function buildHtml(data, title, overrides) {
 <style>${css}</style>
 </head>
 <body>
-${render(data)}
+${renderFn(data)}
 </body>
 </html>`;
 }
 
 const outDir = join(ROOT, "build");
+const CHROME_BIN = process.env.CHROME_BIN || "chromium";
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 
@@ -316,16 +382,18 @@ for (const mdPath of sources) {
   const lines = md.split("\n");
   const { overrides, consumed } = parseFrontmatter(lines);
   const body = lines.slice(consumed).join("\n");
-  const data = parse(body);
-  const title = overrides.title || `${data.name || basename(mdPath, ".md")} - Resume`;
+  const isCover = mdPath.startsWith(join(ROOT, "covers")) || mdPath.includes(`/covers/`);
+  const data = isCover ? parseCoverLetter(body) : parse(body);
+  const suffix = isCover ? "Cover Letter" : "Resume";
+  const title = overrides.title || `${data.name || basename(mdPath, ".md")} - ${suffix}`;
   const name = overrides.name || basename(mdPath, ".md");
-  const html = buildHtml(data, title, overrides);
+  const html = buildHtml(data, title, overrides, isCover ? renderCoverLetter : render);
   const htmlPath = join(outDir, `${name}.html`);
   writeFileSync(htmlPath, html);
 
   const pdfPath = join(outDir, `${name}.pdf`);
   execSync(
-    `chromium --headless --disable-gpu --no-sandbox --print-to-pdf=${pdfPath} --no-pdf-header-footer ${htmlPath}`,
+    `${CHROME_BIN} --headless --disable-gpu --no-sandbox --print-to-pdf=${pdfPath} --no-pdf-header-footer ${htmlPath}`,
     { stdio: "ignore" }
   );
   console.log(`wrote ${pdfPath}`);
