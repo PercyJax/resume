@@ -1,8 +1,11 @@
 # Percy Yeung
 
 New York, NY
+
 (470) 424-7179
+
 percy@percyyeung.com
+
 linkedin.com/in/percyyeung
 
 ## Summary
@@ -12,6 +15,7 @@ Systems engineer working in Rust and Go, specializing in infrastructure tooling,
 ## Professional Experience
 
 **Cloudflare** | New York, NY
+
 _Systems Engineer_ | 2023 - 2026
 
 - Co-developed the appliance agent, the core Rust software that serves as the device's control plane, managing the entire networking stack down to DHCP, NAT, and NTP and configuring an immutable, read-only OS with a persistent partition for device state. Led several of its subsystems:
@@ -28,10 +32,15 @@ _Systems Engineer_ | 2023 - 2026
 - Contributed to the SASE features and requirements delivered through the appliance (security, management, routing, firewalling, and branch connectivity), behind Cloudflare One's recognition as a Visionary in the Gartner Magic Quadrant for SASE Platforms (2025, 2026).
 
 **CodeMettle** | Atlanta, GA
+
 _Associate Principal Software Development Engineer, DevOps_ | 2022 - 2023
+
 _IT Manager_ | 2020 - 2022
+
 _Senior Engineer_ | 2019 - 2020
+
 _Software Engineer_ | 2018 - 2019
+
 _Associate Software Engineer_ | 2015 - 2016
 
 - Rebuilt the company network as CodeMettle grew from a ~30-person office to a 150+ employee workspace, including a complete office relocation: greenfield fiber and Ethernet plant, dedicated lab/data-center space, and hands-on ownership of power budgets, cooling, layout, and installation.
@@ -42,6 +51,7 @@ _Associate Software Engineer_ | 2015 - 2016
 - Led DevOps automation across hybrid cloud and on-premises environments, and managed production website infrastructure including TLS/PKI certificate management and DNS configuration.
 
 **Georgia Institute of Technology** | Atlanta, GA
+
 _Cyber Security Analyst_ | 2016 - 2017
 
 - Performed digital forensics, vulnerability analysis, and network security monitoring in a research lab environment.

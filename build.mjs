@@ -58,9 +58,11 @@ function parse(md) {
     i = 1;
   }
   while (i < lines.length && !lines[i].trim()) i++;
-  while (i < lines.length && lines[i].trim()) {
-    contact.push(lines[i].trim());
-    i++;
+  for (; i < lines.length; i++) {
+    const t = lines[i].trim();
+    if (!t) continue;
+    if (t.startsWith("## ")) break;
+    contact.push(t);
   }
 
   const sections = [];

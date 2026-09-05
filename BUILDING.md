@@ -53,8 +53,11 @@ Resumes are plain Markdown with a few conventions:
 # Your Name
 
 Location
+
 (555) 123-4567
+
 you@example.com
+
 linkedin.com/in/you
 
 ## Summary
@@ -64,7 +67,9 @@ One-paragraph summary.
 ## Professional Experience
 
 **Employer | Remote**
+
 _Job Title | Jan 2020 - Dec 2023_
+
 - An achievement
   - A sub-bullet under that achievement
 
@@ -76,17 +81,22 @@ _Job Title | Jan 2020 - Dec 2023_
 ## Education
 
 **University | City**
+
 _Degree | Year_
+
 - GPA
 ```
 
 Conventions:
 
 - **Name:** first line, `# Name`.
-- **Contact:** one item per line right after the name (each may carry a
-  location, phone, email, or LinkedIn URL). No delimiter needed.
-- **Jobs:** `**Job Title | Location**`, followed by a `_Role | Dates_` line,
-  then `-` bullets with optional `  -` sub-bullets.
+- **Contact:** one item per paragraph (blank-line separated) right after the
+  name, before the first `##` heading. Each contact item may be a location,
+  phone number, email, or LinkedIn URL.
+- **Jobs:** `**Job Title | Location**` as its own paragraph, a blank line, then
+  each `_Role | Dates_` line as its own paragraph, then `-` bullets with
+  optional `  -` sub-bullets. A single company can list several roles as
+  separate paragraphs.
 - **Education:** `**School | Location**`, `_Degree | Dates_`, optional GPA
   bullet. Grouped into each school until the next bold line.
 - **Skills:** bullets of `**Label:** value`, rendered as labeled rows.
