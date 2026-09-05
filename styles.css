@@ -1,0 +1,258 @@
+:root {
+  --base-font: "Fira Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --icon-font: "Noto Color Emoji", "Symbols Nerd Font", "Apple Color Emoji", sans-serif;
+  --mono-font: "SF Mono", "Cascadia Code", Consolas, monospace;
+  --base-size: 10.5pt;
+  --name-size: 25pt;
+  --section-size: 10.5pt;
+  --role-size: 10.5pt;
+
+  --ink: #1a1a1a;
+  --muted: #444444;
+  --accent: #2f6fed;
+  --accent-soft: #eaf0fd;
+  --rule: #d6d6d6;
+  --bg: #ffffff;
+
+  --line-height: 1.4;
+  --name-weight: 700;
+  --section-gap: 11pt;
+  --contact-gap: 4pt;
+  --bullet-gap: 4.5pt;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #e8e8e8;
+}
+
+body {
+  font-family: var(--base-font);
+  font-size: var(--base-size);
+  color: var(--ink);
+  line-height: var(--line-height);
+  background: var(--bg);
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.55in 0.7in;
+}
+
+/* ---- Header ---- */
+.name {
+  font-size: var(--name-size);
+  font-weight: var(--name-weight);
+  letter-spacing: 0.5pt;
+  color: var(--accent);
+}
+
+.contact {
+  font-size: 9.5pt;
+  color: var(--muted);
+  margin-top: var(--contact-gap);
+}
+
+.contact .item {
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--muted);
+}
+
+.contact a.item,
+.contact a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.contact a:hover {
+  color: var(--accent);
+}
+
+.contact .icon {
+  font-family: var(--icon-font);
+  font-size: 8.5pt;
+  margin-right: 3pt;
+  vertical-align: middle;
+}
+
+.contact .sep {
+  color: var(--rule);
+  padding: 0 6pt;
+}
+
+/* ---- Sections ---- */
+section {
+  margin-top: var(--section-gap);
+}
+
+h2 {
+  font-size: var(--section-size);
+  text-transform: uppercase;
+  letter-spacing: 0.5pt;
+  color: var(--ink);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2pt;
+  margin-bottom: 6pt;
+}
+
+h2 .sicon {
+  font-family: var(--icon-font);
+  font-size: 8.5pt;
+  margin-right: 5pt;
+  vertical-align: 1px;
+}
+
+/* ---- Job headers ---- */
+.job {
+  margin-bottom: var(--bullet-gap);
+}
+
+.job-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: var(--role-size);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.job-title .dates {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 9.5pt;
+  white-space: nowrap;
+}
+
+.job-sub {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 0.5pt;
+  position: relative;
+}
+
+.job-sub .dates,
+.education .dates {
+  float: right;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 9.5pt;
+}
+
+.job-sub .dates {
+  margin-left: 8pt;
+}
+
+/* ---- Summary ---- */
+.summary p {
+  color: var(--ink);
+}
+
+/* ---- Bullets ---- */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-top: var(--bullet-gap);
+  padding-left: 14pt;
+  position: relative;
+}
+
+li:before {
+  content: "\2022";
+  position: absolute;
+  left: 2pt;
+  color: var(--accent);
+  font-size: 9pt;
+  line-height: 1.5;
+}
+
+li.sub {
+  padding-left: 28pt;
+  font-size: 9.5pt;
+  margin-top: 1.5pt;
+}
+
+li.sub:before {
+  content: "\2013";
+  left: 16pt;
+  color: var(--muted);
+}
+
+/* ---- Skills ---- */
+.skills li {
+  padding-left: 0;
+}
+
+.skills li:before {
+  content: none;
+}
+
+.skills .label {
+  font-weight: 700;
+}
+
+.skills .label:after {
+  content: " ";
+}
+
+/* ---- Education ---- */
+.education .school {
+  font-weight: 700;
+}
+
+.education .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.education .dates {
+  color: var(--muted);
+  font-size: 9.5pt;
+  white-space: nowrap;
+}
+
+.education .gpa {
+  margin-top: 3pt;
+  color: var(--muted);
+  font-size: 9.5pt;
+}
+
+/* ---- Print ---- */
+@media print {
+  html,
+  body {
+    background: #fff;
+    padding: 0;
+  }
+
+  @page {
+    size: letter;
+    margin: 0.35in 0.5in;
+  }
+
+  /* Keep titles attached to the content that follows them. */
+  h2,
+  .job-title,
+  .job-sub,
+  .education .row,
+  .education .gpa {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Avoid orphaned single lines. */
+  p,
+  li {
+    orphans: 2;
+    widows: 2;
+  }
+}

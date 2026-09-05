@@ -1,0 +1,12 @@
+# Generated build artifacts (HTML + PDF)
+/build/
+
+# Job-specific resume variants — private, never commit
+/resumes/
+
+# Node (if dependencies are ever added)
+/node_modules/
+
+# OS junk
+.DS_Store
+Thumbs.db
