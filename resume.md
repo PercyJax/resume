@@ -10,7 +10,7 @@ linkedin.com/in/percyyeung
 
 ## Summary
 
-Systems engineer working in Rust and Go, specializing in infrastructure tooling, networking, and developer platforms. Built and operated the Cloudflare One Appliance (a mission-critical edge system for enterprises with dozens of branch offices), including its management tooling, out-of-band access, and public-facing API infrastructure.
+Systems engineer working in Rust and Go, specializing in networking and infrastructure tooling. Built the Cloudflare One Appliance (a mission-critical edge system for enterprises with dozens of branch offices) and the management tooling, out-of-band access, and public-facing API infrastructure behind it.
 
 ## Professional Experience
 
@@ -18,18 +18,19 @@ Systems engineer working in Rust and Go, specializing in infrastructure tooling,
 
 _Systems Engineer_ | 2023 - 2026
 
-- Co-developed the appliance agent, the core Rust software that serves as the device's control plane, managing the entire networking stack down to DHCP, NAT, and NTP and configuring an immutable, read-only OS with a persistent partition for device state. Led several of its subsystems:
-  - Serial console CLI: a controlled terminal for running custom diagnostics like ping and traceroute over the device's VRF-based network infrastructure, alongside live port status and configuration reporting that surfaces misconfigurations and unexpected device behavior.
-  - Out-of-band reverse shell access over cloudflared tunnels, letting engineers remotely diagnose deployed appliances and cutting time-to-resolution for field issues.
-  - Application-aware traffic shaping: solution that allows the configuration of custom handling of east-west traffic, as well as traffic to/from specified subnets, hostnames, and well-known applications.
+- Built the appliance agent, the core Rust software that serves as the device's control plane - a fully concurrent, event-driven engine on the Tokio runtime - managing the networking stack down to DHCP, NAT, and NTP and configuring an immutable, read-only OS with a persistent partition for device state. Led the creation of several of its subsystems:
+  - Serial console CLI: wrote ping and traceroute from the ground up in Rust to run natively over the device's VRF-based network infrastructure, with live port status and configuration reporting that surfaces misconfigurations and unexpected device behavior.
+  - Out-of-band reverse shell access over cloudflared tunnels, a reverse-tunnel path for remote diagnosis that cuts time-to-resolution for field issues.
+  - Application-aware traffic shaping: solution that allows the configuration of custom handling of east-west traffic, as well as traffic to/from specified subnets, hostnames, and well-known applications, using DNS-based interception as the control point.
 - Built diagnostic AI (opencode) skills that aggregate internal APIs and telemetry sources, replacing the multiple manual API calls with a streamlined way of diagnosing problems and creating reports by simply asking the LLM.
 - Tailored the Linux kernel configuration for the Buildroot-based device image, adapting it to our hardware and use cases.
-- Contributed to the platform's Go APIs, adding features to both the public/internal APIs (which serves all users and dashboard configuration flows) and the protobuf-based controller API that agents on deployed appliances connect to.
-- Expanded the telemetry platform, adding new columns to the ClickHouse and Graph API schemas to widen what we capture, and built Grafana dashboards to visualize the data.
-- Managed our team's infrastructure with Terraform: the Cloudflare provider to configure our own resources using Cloudflare products, and the Kubernetes provider to manage other internal infrastructure hosted in Cloudflare's core datacenters.
-- Built the update cohort system that classifies devices into rollout rings (engineers' test devices, internal employee dogfood tinkerers, Cloudflare office locations around the world, and production customer devices), managing artifacts and the CI/CD pipelines that build and deploy each new version across the fleet in stages.
-- Helped grow a greenfield appliance program from a small team to a fleet of over 500 active devices, each capable of multi-gigabit throughput.
-- Contributed to the SASE features and requirements delivered through the appliance (security, management, routing, firewalling, and branch connectivity), behind Cloudflare One's recognition as a Visionary in the Gartner Magic Quadrant for SASE Platforms (2025, 2026).
+- Regularly extend the platform's Go APIs with new endpoints and features across the public/internal APIs (user and dashboard configuration flows) and the protobuf-based controller API that agents on deployed appliances connect to; the APIs are stateless and freely restartable, with both the Postgres deployment and the API fleet replicated across three data centers in two cities for disaster recovery and failover.
+- Migrated and evolved the Postgres schema behind fleet device and configuration state - a routine part of shipping features, including converting legacy JSON blob columns to typed, queryable columns.
+- Expanded our ClickHouse and Graph API platforms to widen what data we captured, and built Grafana dashboards to visualize this telemetry.
+- Managed our product's infrastructure running on Cloudflare products as well as Kubernetes using Terraform.
+- Built the update cohort system that classifies devices into rollout rings, managing artifacts and the CI/CD pipelines that build and deploy each new version across the fleet in stages.
+- Helped grow a small-team greenfield network appliance program to a fleet of over 500 active customer devices, each capable of multi-gigabit throughput.
+- Built local security features for the SASE appliance: password policies, secure erase, and password change/reset flows, including the login and password UI. Shipped as part of the appliance's SASE features, behind Cloudflare One's recognition as a Visionary in the Gartner Magic Quadrant for SASE Platforms (2025, 2026).
 
 **CodeMettle** | Atlanta, GA
 

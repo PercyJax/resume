@@ -1,13 +1,13 @@
 # Generated build artifacts (HTML + PDF)
 /build/
 
-# Job-specific resume variants — private, never commit
+# Job-specific resume variants - private, never commit
 /resumes/
 
-# Job-specific cover letters — private, never commit
+# Job-specific cover letters - private, never commit
 /covers/
 
-# Application question drafts — private, never commit, not built
+# Application question drafts - private, never commit, not built
 /applications/
 
 # Node (if dependencies are ever added)
