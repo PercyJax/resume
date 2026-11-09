@@ -2,14 +2,11 @@ name: Build resume PDF
 
 on:
   push:
-    paths:
-      - resume.md
-      - build.mjs
-      - styles.css
   workflow_dispatch:
 
 permissions:
   contents: read
+  actions: write
 
 jobs:
   build:
