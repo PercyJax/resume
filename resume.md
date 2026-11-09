@@ -45,7 +45,8 @@ _Software Engineer_ | 2018 - 2019
 _Associate Software Engineer_ | 2015 - 2016
 
 - Rebuilt the company network as CodeMettle grew from a ~30-person office to a 150+ employee workspace, including a complete office relocation: greenfield fiber and Ethernet plant, dedicated lab/data-center space, and hands-on ownership of power budgets, cooling, layout, and installation.
-- Evolved the network from a small-office setup to a CMMC-compliant environment, implementing VPN access and company-wide identity and access management across Azure Active Directory and on-premises environments.
+- Evolved the network from a small-office setup to a CMMC-compliant environment, implementing Pritunl VPN access and company-wide identity and access management across Azure Active Directory and on-premises environments.
+- Designed and built portable site-to-site "VPN in a box" devices for sales engineers and employees with little networking expertise, simplifying access from conventions and remote sites to internal lab datacenters over technologies including ZeroTier.
 - Managed a team of 4 engineers and architected secure cloud infrastructure on Microsoft Azure.
 - Administered the Proxmox virtualization platform, automating template deployment for scaling and integrating Active Directory for user permissions and quota management.
 - Designed and built Azure-based security infrastructure and military tactical network simulation environments with realistic failure modes for compliance training and red-team exercises.
@@ -60,7 +61,7 @@ _Cyber Security Analyst_ | 2016 - 2017
 ## Technical Skills
 
 - **Languages:** Rust, Go
-- **Networking & Infrastructure:** AWS, Azure, Kubernetes, Terraform, Proxmox, ECMP, link aggregation, VLANs
+- **Networking & Infrastructure:** AWS, Azure, Kubernetes, Terraform, Proxmox, VLANs, VRF, DHCP, NAT, DNS, VPN, WireGuard
 - **Observability & Data:** ClickHouse, Prometheus, Grafana
 - **Developer Tooling:** Protobuf, GitLab CI/CD, TeamCity, HashiCorp Vault, Buildroot
 - **Spoken Languages:** English, Cantonese, Mandarin, Russian (Elementary)
