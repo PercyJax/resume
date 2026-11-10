@@ -174,13 +174,21 @@ Frontmatter is stripped before parsing, so it never leaks into the output.
 
 ## GitHub Actions
 
-`.github/workflows/build-resume.yml` auto-builds on every push that touches
-`resume.md`, `build.mjs`, or `styles.css` (plus manual `workflow_dispatch`):
+`.github/workflows/build-resume.yml` auto-builds on every push (plus manual
+`workflow_dispatch`):
 
 1. Checkout, Node 20, Google Chrome (`CHROME_BIN`), and Fira Sans/Noto Color
    Emoji fonts (for layout parity) are set up on `ubuntu-latest`.
 2. `node build.mjs resume.md` builds only the master resume.
 3. `build/resume.pdf` is uploaded as a `resume-pdf` artifact, labeled by run.
+4. The same PDF is published to the rolling `latest` GitHub release
+   (`--clobber` replaces the asset each run).
+
+Stable public URL (always the newest build):
+
+```
+https://github.com/PercyJax/resume/releases/download/latest/resume.pdf
+```
 
 Artifacts are versioned per workflow run. A prune step deletes every prior
 `resume-pdf` artifact after upload, so effectively only the latest is kept.
