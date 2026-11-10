@@ -228,7 +228,6 @@ li.sub:before {
 
 /* ---- Cover letter ---- */
 .letter {
-  max-width: 7in;
   margin-top: 22pt;
   line-height: 1.5;
 }
@@ -256,11 +255,13 @@ li.sub:before {
   body {
     background: #fff;
     padding: 0;
+    margin: 0;
+    max-width: none;
   }
 
   @page {
     size: letter;
-    margin: 0.35in 0.5in;
+    margin: 0.5in;
   }
 
   /* Keep titles attached to the content that follows them. */
