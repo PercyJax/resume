@@ -10,7 +10,7 @@ linkedin.com/in/percyyeung
 
 ## Summary
 
-Systems engineer working in Rust and Go, specializing in networking and infrastructure tooling. Built the Cloudflare One Appliance (a mission-critical edge system for enterprises with dozens of branch offices) and the management tooling, out-of-band access, and public-facing API infrastructure behind it.
+Systems engineer in Rust and Go, specializing in networking and infrastructure tooling. Built the Cloudflare One Appliance and the management, out-of-band access, and public API infrastructure behind it.
 
 ## Professional Experience
 
@@ -21,17 +21,17 @@ _Systems Engineer_ | 2023 - 2026
 - Built the appliance agent, the core Rust software that serves as the device's control plane - a fully concurrent, event-driven engine on the Tokio runtime - managing the networking stack down to DHCP, NAT, and NTP and configuring an immutable, read-only OS with a persistent partition for device state. Led the creation of several of its subsystems:
   - Serial console CLI: wrote ping and traceroute from the ground up in Rust to run natively over the device's VRF-based network infrastructure, with live port status and configuration reporting that surfaces misconfigurations and unexpected device behavior.
   - Out-of-band reverse shell access over cloudflared tunnels, a reverse-tunnel path for remote diagnosis that cuts time-to-resolution for field issues.
-  - Application-aware traffic shaping: solution that allows the configuration of custom handling of east-west traffic, as well as traffic to/from specified subnets, hostnames, and well-known applications, using DNS-based interception as the control point.
-- Built diagnostic AI (opencode) skills that aggregate internal APIs and telemetry sources, replacing the multiple manual API calls with a streamlined way of diagnosing problems and creating reports by simply asking the LLM.
+  - Application-aware traffic shaping: custom handling of east-west traffic and traffic to/from specified subnets, hostnames, and well-known applications, using DNS-based interception as the control point.
+- Built diagnostic AI (opencode) skills that aggregate internal APIs and telemetry, replacing manual API calls with a streamlined way to diagnose problems and create reports by asking the LLM.
 - Tailored the Linux kernel configuration for the Buildroot-based device image, adapting it to our hardware and use cases, including packet filtering and network subsystem behavior.
-- Regularly extend the platform's Go APIs with new endpoints and features across the public/internal APIs (user and dashboard configuration flows) and the protobuf-based controller API that agents on deployed appliances connect to; the APIs are stateless and freely restartable, with both the Postgres deployment and the API fleet replicated across three data centers in two cities for disaster recovery and failover.
+- Regularly extend the platform's Go APIs with new endpoints across the public/internal APIs and the protobuf-based controller API that deployed appliances connect to; stateless and freely restartable, with Postgres and the API fleet replicated across three data centers in two cities for disaster recovery.
 - Migrated and evolved the Postgres schema behind fleet device and configuration state - a routine part of shipping features, including converting legacy JSON blob columns to typed, queryable columns.
 - Expanded our ClickHouse and Graph API platforms to widen what data we captured, and built Grafana dashboards to visualize this telemetry.
 - Managed our product's infrastructure running on Cloudflare products as well as Kubernetes using Terraform.
 - Built the update cohort system that classifies devices into rollout rings, managing artifacts and the CI/CD pipelines that build and deploy each new version across the fleet in stages.
 - Helped grow a small-team greenfield network appliance program to a fleet of over 500 active customer devices, each capable of multi-gigabit throughput.
 - Worked directly with customers to resolve critical network escalations alongside the customer support team, and supported integrations for new clients.
-- Built local security features for the SASE appliance: password policies, secure erase, and password change/reset flows, including the login and password UI. Shipped as part of the appliance's SASE features, behind Cloudflare One's recognition as a Visionary in the Gartner Magic Quadrant for SASE Platforms (2025, 2026).
+- Built local security features for the SASE appliance: password policies, secure erase, and password change/reset flows. Shipped as part of Cloudflare One's recognition as a Visionary in the Gartner Magic Quadrant for SASE Platforms (2025, 2026).
 - Interviewed candidates for the systems engineering hiring loop.
 
 **CodeMettle** | Atlanta, GA
@@ -49,9 +49,8 @@ _Associate Software Engineer_ | 2015 - 2016
 - Rebuilt the company network as CodeMettle grew from a ~30-person office to a 150+ employee workspace, including a complete office relocation: greenfield fiber and Ethernet plant, dedicated lab/data-center space, and hands-on ownership of power budgets, cooling, layout, and installation.
 - Evolved the network from a small-office setup to a CMMC-compliant environment, implementing Pritunl VPN access and company-wide identity and access management across Azure Active Directory and on-premises environments.
 - Designed and built portable site-to-site "VPN in a box" devices for sales engineers and employees with little networking expertise, simplifying access from conventions and remote sites to internal lab datacenters over technologies including ZeroTier.
-- Supported customers directly with remote and on-site assistance, including a deployment at a US military base, building professional customer-facing experience.
-- Managed a team of 4 engineers - a mix of software and IT - across Senior Engineer and IT Manager roles, owning hiring and recruiting, performance reviews, and career development, and architected secure cloud infrastructure on Microsoft Azure.
-- Built team process and culture as CodeMettle scaled from a ~30-person office to 150+ employees, partnering with product on planning and prioritization and owning the team's budget and vendor relationships.
+- Supported customers directly, including a deployment at a US military base.
+- Managed a team of 4 engineers across Senior Engineer and IT Manager roles - owning hiring, performance reviews, and career development - and built team process, budget, and vendor ownership as CodeMettle scaled from a ~30-person office to 150+ employees, partnering with product on planning and prioritization; architected secure cloud infrastructure on Microsoft Azure.
 - Administered the Proxmox virtualization platform, automating template deployment for scaling and integrating Active Directory for user permissions and quota management.
 - Designed and built Azure-based security infrastructure and military tactical network simulation environments with realistic failure modes for compliance training and red-team exercises.
 - Led DevOps automation across hybrid cloud and on-premises environments, ran on-call rotations and led incident response for production systems, and managed production website infrastructure including TLS/PKI certificate management and DNS configuration.
